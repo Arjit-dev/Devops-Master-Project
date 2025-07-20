@@ -24,7 +24,10 @@ jobs:
         run: terraform -chdir=terraform validate
 
       - name: Run tfsec scan (non-blocking)
-        run: tfsec ./terraform || echo "⚠️ tfsec warnings ignored for now"
+  run: |
+    tfsec ./terraform
+    echo "⚠️ tfsec warnings ignored for now"
+    exit 0
 
   docker-build-push:
     needs: terraform
